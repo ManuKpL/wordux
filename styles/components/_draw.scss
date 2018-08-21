@@ -1,0 +1,6 @@
+div.draw-wrapper > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  > p > b { font-size: 20px; }
+}

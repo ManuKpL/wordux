@@ -1,5 +1,7 @@
 extends: airbnb
 rules:
   react/jsx-one-expression-per-line: 0
+  react/jsx-no-bind: 0
+  react/no-unknown-property: [1, { ignore: ['class'] }]
 globals:
   document: true

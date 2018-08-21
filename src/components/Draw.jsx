@@ -1,19 +1,32 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Draw = ({ draw }) => {
-  const letters = draw
-    .map(({ uid, value }) => (<li key={uid}>{value}</li>));
+import Letter from './Letter';
+
+const Draw = ({ addLetter, draw, removeLetter }) => {
+  const letters = draw.map(letter => (
+    <Letter
+      key={letter.uid}
+      addLetter={addLetter}
+      letter={letter}
+      removeLetter={removeLetter}
+    />
+  ));
+
   return (
-    <div>
+    <div class="draw-wrapper">
       <p>Your letters are :</p>
-      <ul>{letters}</ul>
+      <div>
+        {letters}
+      </div>
     </div>
   );
 };
 
 Draw.propTypes = {
+  addLetter: PropTypes.func.isRequired,
   draw: PropTypes.arrayOf(Object),
+  removeLetter: PropTypes.func.isRequired,
 };
 
 Draw.defaultProps = {
