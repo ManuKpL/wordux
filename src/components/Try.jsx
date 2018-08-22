@@ -3,7 +3,7 @@ import React from 'react';
 
 import t from '../providers/translate/translate';
 
-const Try = ({ word }) => {
+const Try = ({ points, word }) => {
   let placeHolder;
   let wordElement;
 
@@ -13,7 +13,7 @@ const Try = ({ word }) => {
     wordElement = '';
   } else {
     placeHolder = '';
-    wordElement = (<span>{word}</span>);
+    wordElement = (<span>{word} <em>{`(${points} ${t('shared.points')}`})</em></span>);
   }
 
   return (
@@ -25,10 +25,12 @@ const Try = ({ word }) => {
 };
 
 Try.propTypes = {
+  points: PropTypes.number,
   word: PropTypes.string,
 };
 
 Try.defaultProps = {
+  points: 0,
   word: 'shared.none',
 };
 

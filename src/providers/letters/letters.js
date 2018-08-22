@@ -8,7 +8,7 @@ export default (() => {
   }
 
   const buildLetterInstance = ({ points, value, index }) => ({
-    uid: value + index, value, points, modifiers: [],
+    uid: value + index, value, points: parseInt(points, 10), modifiers: [],
   });
 
   const mapLettersDefinitions = ([points, arrays]) => (

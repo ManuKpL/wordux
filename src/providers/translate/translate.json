@@ -6,7 +6,8 @@
     "baseline": "A game of words"
   },
   "shared": {
-    "none": "aucun"
+    "none": "aucun",
+    "points": "points"
   },
   "try": {
     "yourTry": "Votre essai"
