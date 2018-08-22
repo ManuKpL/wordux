@@ -1,6 +1,7 @@
-div.draw-wrapper > div {
+section.draw-wrapper > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  min-height: 100px;
   > p > b { font-size: 20px; }
 }

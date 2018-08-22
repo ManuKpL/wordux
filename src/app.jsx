@@ -39,7 +39,7 @@ class WorduxLayout extends React.Component {
         draw: [...draw, randomLetter],
         remainingCount: this.dynamicList.length,
       }));
-    }, 300);
+    }, 400);
   }
 
   render() {

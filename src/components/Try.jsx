@@ -4,17 +4,23 @@ import React from 'react';
 import t from '../providers/translate/translate';
 
 const Try = ({ word }) => {
+  let placeHolder;
   let wordElement;
-  if (/[a-z]+/.test(word)) {
-    wordElement = (<i>{t(word)}</i>);
+
+  const isPlaceHolder = /[a-z]+/.test(word);
+  if (isPlaceHolder) {
+    placeHolder = (<i>{t(word)}</i>);
+    wordElement = '';
   } else {
-    wordElement = (<b>{word}</b>);
+    placeHolder = '';
+    wordElement = (<span>{word}</span>);
   }
 
   return (
-    <div class="draw-wrapper">
-      <p>{t('try.yourTry')} : {wordElement}</p>
-    </div>
+    <section class="try-wrapper">
+      <p>{t('try.yourTry')} : {placeHolder}</p>
+      <div>{wordElement}</div>
+    </section>
   );
 };
 
@@ -23,7 +29,7 @@ Try.propTypes = {
 };
 
 Try.defaultProps = {
-  word: 'try.none',
+  word: 'shared.none',
 };
 
 export default Try;

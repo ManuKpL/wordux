@@ -1,12 +1,14 @@
 {
-  "game": {
-    "baseline": "A game of words"
-  },
   "draw": {
     "yourDraw": "Votre tirage"
   },
-  "try": {
-    "yourTry": "Votre essai",
+  "game": {
+    "baseline": "A game of words"
+  },
+  "shared": {
     "none": "aucun"
+  },
+  "try": {
+    "yourTry": "Votre essai"
   }
 }

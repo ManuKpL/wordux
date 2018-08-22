@@ -5,6 +5,7 @@ import t from '../providers/translate/translate';
 import Letter from './Letter';
 
 const Draw = ({ addLetter, draw, removeLetter }) => {
+  const placeHolder = draw.length === 0 ? (<i>{t('shared.none')}</i>) : '';
   const letters = draw.map(letter => (
     <Letter
       key={letter.uid}
@@ -15,12 +16,12 @@ const Draw = ({ addLetter, draw, removeLetter }) => {
   ));
 
   return (
-    <div class="draw-wrapper">
-      <p>{t('draw.yourDraw')} :</p>
+    <section class="draw-wrapper">
+      <p>{t('draw.yourDraw')} : {placeHolder}</p>
       <div>
         {letters}
       </div>
-    </div>
+    </section>
   );
 };
 
