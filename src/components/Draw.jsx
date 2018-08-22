@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import t from '../providers/translate/translate';
 import Letter from './Letter';
 
 const Draw = ({ addLetter, draw, removeLetter }) => {
@@ -15,7 +16,7 @@ const Draw = ({ addLetter, draw, removeLetter }) => {
 
   return (
     <div class="draw-wrapper">
-      <p>Your letters are :</p>
+      <p>{t('draw.yourDraw')} :</p>
       <div>
         {letters}
       </div>

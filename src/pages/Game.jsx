@@ -8,14 +8,14 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      word: 'None',
+      word: 'try.none',
     };
     this.letters = [];
   }
 
   // private
   buildNewWord() {
-    return this.letters.reduce((w, { value }) => w + value, '') || 'None';
+    return this.letters.reduce((w, { value }) => w + value, '') || 'try.none';
   }
 
   addLetterToWord(letter) {

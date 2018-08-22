@@ -1,0 +1,12 @@
+{
+  "game": {
+    "baseline": "A game of words"
+  },
+  "draw": {
+    "yourDraw": "Votre tirage"
+  },
+  "try": {
+    "yourTry": "Votre essai",
+    "none": "aucun"
+  }
+}

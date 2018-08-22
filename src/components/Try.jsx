@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import t from '../providers/translate/translate';
+
 const Try = ({ word }) => {
   let wordElement;
   if (/[a-z]+/.test(word)) {
-    wordElement = (<i>{word}</i>);
+    wordElement = (<i>{t(word)}</i>);
   } else {
     wordElement = (<b>{word}</b>);
   }
 
   return (
     <div class="draw-wrapper">
-      <p>Your try : {wordElement}</p>
+      <p>{t('try.yourTry')} : {wordElement}</p>
     </div>
   );
 };
@@ -21,7 +23,7 @@ Try.propTypes = {
 };
 
 Try.defaultProps = {
-  word: 'None',
+  word: 'try.none',
 };
 
 export default Try;
