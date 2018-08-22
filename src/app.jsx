@@ -1,60 +1,52 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { sample, shuffle } from 'lodash';
+
+import lettersModels from './providers/letters/letters';
+
 import Game from './pages/Game';
 
 class WorduxLayout extends React.Component {
   constructor(props) {
     super(props);
+
+    this.DRAW_LENGTH = 10;
+    this.INITIAL_LIST = lettersModels;
+    this.dynamicList = shuffle([...this.INITIAL_LIST]);
+
     this.state = {
-      draw: [
-        {
-          uid: 0,
-          value: 'D',
-          points: 2,
-          modifiers: [],
-        },
-        {
-          uid: 1,
-          value: 'W',
-          points: 10,
-          modifiers: [],
-        },
-        {
-          uid: 2,
-          value: 'A',
-          points: 1,
-          modifiers: [],
-        },
-        {
-          uid: 3,
-          value: 'G',
-          points: 3,
-          modifiers: [],
-        },
-        {
-          uid: 4,
-          value: 'N',
-          points: 1,
-          modifiers: [],
-        },
-        {
-          uid: 5,
-          value: 'I',
-          points: 1,
-          modifiers: [],
-        },
-        {
-          uid: 6,
-          value: 'R',
-          points: 1,
-          modifiers: [],
-        },
-      ],
+      draw: [],
+      remainingCount: this.dynamicList.length,
     };
   }
 
+  howManyLettersToDraw() {
+    const { draw, remainingCount } = this.state;
+    if (remainingCount === 0) {
+      return 0;
+    }
+
+    const missingLetters = this.DRAW_LENGTH - draw.length;
+    return Math.min(missingLetters, remainingCount);
+  }
+
+  drawLetter() {
+    const randomLetter = sample(this.dynamicList);
+    this.dynamicList = this.dynamicList.filter(({ uid }) => uid !== randomLetter.uid);
+    setTimeout(() => {
+      this.setState(({ draw }) => ({
+        draw: [...draw, randomLetter],
+        remainingCount: this.dynamicList.length,
+      }));
+    }, 300);
+  }
+
   render() {
+    const lettersToDraw = this.howManyLettersToDraw();
+    if (lettersToDraw > 0) {
+      this.drawLetter();
+    }
     const { draw } = this.state;
     return (
       <div>
