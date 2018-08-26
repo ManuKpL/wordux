@@ -1,1 +1,1 @@
-import './src/app';
+require('./wordux-api/index');
