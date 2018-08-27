@@ -10,59 +10,66 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playedWords: [],
       currentPoints: 0,
+      playedWords: [],
+      selectedLetters: [],
       word: 'shared.none',
     };
-    this.letters = [];
     this.promise = undefined;
   }
 
   // PRIVATES ..................................................................
 
-  buildNewWord() {
-    return this.letters.reduce((w, { value }) => w + value, '') || 'shared.none';
+  buildNewWord(letters) {
+    return letters.reduce((w, { value }) => w + value, '') || 'shared.none';
   }
 
-  calculateCurrentPoints() {
-    return this.letters.reduce((sum, { points }) => sum + points, 0);
+  calculateCurrentPoints(letters) {
+    return letters.reduce((sum, { points }) => sum + points, 0);
+  }
+
+  updateStateInGame(selectedLetters) {
+    const newWord = this.buildNewWord(selectedLetters);
+    return {
+      currentPoints: this.calculateCurrentPoints(selectedLetters),
+      selectedLetters,
+      word: newWord,
+    };
   }
 
   // GAME LOGIC ................................................................
 
   addLetterToWord(letter) {
-    this.letters = [...this.letters, letter];
-    const newWord = this.buildNewWord();
-    this.setState({
-      currentPoints: this.calculateCurrentPoints(),
-      word: newWord,
+    this.setState(({ selectedLetters }) => {
+      const newLetters = [...selectedLetters, letter];
+      return this.updateStateInGame(newLetters);
     });
   }
 
   removeLetterFromWord(letter) {
-    this.letters = this.letters.filter(l => l.uid !== letter.uid);
-    const newWord = this.buildNewWord();
-    this.setState({
-      currentPoints: this.calculateCurrentPoints(),
-      word: newWord,
+    this.setState(({ selectedLetters }) => {
+      const newLetters = selectedLetters.filter(l => l.uid !== letter.uid);
+      return this.updateStateInGame(newLetters);
     });
   }
 
   removeWord() {
     this.setState({
       currentPoints: undefined,
+      selectedLetters: [],
       word: undefined,
     });
   }
 
   saveWord() {
     this.setState(({ currentPoints, playedWords, word }) => ({
+      currentPoints: undefined,
       playedWords: playedWords.concat({
         points: currentPoints,
         timeStamp: Date.now(),
         word,
       }),
-      currentPoints: undefined,
+      selectedLetters: [],
       word: undefined,
     }));
   }
@@ -82,7 +89,6 @@ class Game extends React.Component {
         })
         .then(() => {
           this.promise = undefined;
-          this.letters = [];
         });
     }
   }
@@ -91,7 +97,9 @@ class Game extends React.Component {
 
   render() {
     const { draw } = this.props;
-    const { currentPoints, playedWords, word } = this.state;
+    const {
+      currentPoints, playedWords, selectedLetters, word,
+    } = this.state;
 
     return (
       <main>
@@ -100,6 +108,7 @@ class Game extends React.Component {
           addLetter={this.addLetterToWord.bind(this)}
           draw={draw}
           removeLetter={this.removeLetterFromWord.bind(this)}
+          selectedLetters={selectedLetters}
         />
         <Try word={word} points={currentPoints} />
         <SubmitWord submit={this.submitWord.bind(this)} />
