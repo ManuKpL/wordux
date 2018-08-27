@@ -24,11 +24,13 @@ export default class LettersService {
         (finalAccumulator, [points, lettersCouples]) => [
           ...finalAccumulator,
           ...lettersCouples.reduce(
-            (modelsAccumulator, [value, total], index) => [
-              ...modelsAccumulator,
-              ...Array(total)
-                .fill(new Letter({ points, value, index })),
-            ],
+            (modelsAccumulator, [value, total]) => {
+              for (let i = 0; i < total; i += 1) {
+                modelsAccumulator
+                  .push(new Letter({ points, value, index: i + 1 }));
+              }
+              return modelsAccumulator;
+            },
             [],
           ),
         ],

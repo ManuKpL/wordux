@@ -4,7 +4,7 @@ const getLetters = (() => {
   const service = new LettersService();
 
   return () => [
-    '/letters',
+    '/api/letters',
     (req, res) => {
       res.json({
         status: 'OK',

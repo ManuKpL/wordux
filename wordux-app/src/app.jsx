@@ -1,9 +1,8 @@
+import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { sample, shuffle } from 'lodash';
-
-import lettersModels from './providers/letters/letters';
 
 import Game from './pages/Game';
 
@@ -12,13 +11,22 @@ class WorduxLayout extends React.Component {
     super(props);
 
     this.DRAW_LENGTH = 10;
-    this.INITIAL_LIST = lettersModels;
-    this.dynamicList = shuffle([...this.INITIAL_LIST]);
+    this.INITIAL_LIST = [];
 
+    this.dynamicList = [];
     this.state = {
       draw: [],
       remainingCount: this.dynamicList.length,
     };
+  }
+
+  componentWillMount() {
+    axios.get('/api/letters')
+      .then(({ data }) => {
+        this.INITIAL_LIST = data.lettersList;
+        this.dynamicList = shuffle([...this.INITIAL_LIST]);
+        this.drawLetter();
+      });
   }
 
   howManyLettersToDraw() {
@@ -43,11 +51,13 @@ class WorduxLayout extends React.Component {
   }
 
   render() {
+    const { draw, remainingCount } = this.state;
     const lettersToDraw = this.howManyLettersToDraw();
-    if (lettersToDraw > 0) {
+
+    if (remainingCount > 0 && lettersToDraw > 0) {
       this.drawLetter();
     }
-    const { draw } = this.state;
+
     return (
       <div>
         <h1>Hello Wordux!</h1>

@@ -11,7 +11,13 @@ module.exports = {
   },
   devServer: {
     contentBase: resolve(__dirname, 'dist'),
+    open: true,
     port: 1337,
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:3000',
+      },
+    },
   },
   mode: 'development',
   module: {
