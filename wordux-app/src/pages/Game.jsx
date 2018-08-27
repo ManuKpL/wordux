@@ -53,6 +53,12 @@ class Game extends React.Component {
     });
   }
 
+  removeLettersFromDraw() {
+    const { removeLettersFromDraw } = this.props;
+    const { selectedLetters } = this.state;
+    removeLettersFromDraw(selectedLetters);
+  }
+
   removeWord() {
     this.setState({
       currentPoints: undefined,
@@ -62,16 +68,19 @@ class Game extends React.Component {
   }
 
   saveWord() {
-    this.setState(({ currentPoints, playedWords, word }) => ({
-      currentPoints: undefined,
-      playedWords: playedWords.concat({
-        points: currentPoints,
-        timeStamp: Date.now(),
-        word,
-      }),
-      selectedLetters: [],
-      word: undefined,
-    }));
+    this.setState(({ currentPoints, playedWords, word }) => {
+      this.removeLettersFromDraw();
+      return {
+        currentPoints: undefined,
+        playedWords: playedWords.concat({
+          points: currentPoints,
+          timeStamp: Date.now(),
+          word,
+        }),
+        selectedLetters: [],
+        word: undefined,
+      };
+    });
   }
 
   submitWord() {
@@ -120,6 +129,7 @@ class Game extends React.Component {
 
 Game.propTypes = {
   draw: PropTypes.arrayOf(Object),
+  removeLettersFromDraw: PropTypes.func.isRequired,
   submitWord: PropTypes.func.isRequired,
 };
 

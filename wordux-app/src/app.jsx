@@ -44,6 +44,15 @@ class WorduxLayout extends React.Component {
     }, 400);
   }
 
+  removeLettersFromDraw(letters = []) {
+    this.setState(({ draw }) => {
+      const newDraw = draw.filter(l => !letters.find(e => e.uid === l.uid));
+      return {
+        draw: newDraw,
+      };
+    });
+  }
+
   submitWord(word) {
     return axios.get(`/api/words/${word}`)
       .then(({ data }) => data.validity);
@@ -74,7 +83,11 @@ class WorduxLayout extends React.Component {
     return (
       <div>
         <h1>Hello Wordux!</h1>
-        <Game draw={draw} submitWord={this.submitWord.bind(this)} />
+        <Game
+          draw={draw}
+          removeLettersFromDraw={this.removeLettersFromDraw.bind(this)}
+          submitWord={this.submitWord.bind(this)}
+        />
       </div>
     );
   }
