@@ -111,7 +111,7 @@ class Game extends React.Component {
           selectedLetters={selectedLetters}
         />
         <Try word={word} points={currentPoints} />
-        <SubmitWord submit={this.submitWord.bind(this)} />
+        <SubmitWord clear={this.removeWord.bind(this)} submit={this.submitWord.bind(this)} />
         <PlayedWords values={playedWords} />
       </main>
     );

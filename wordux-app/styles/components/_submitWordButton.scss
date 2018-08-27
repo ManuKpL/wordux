@@ -1,17 +1,22 @@
 .submit-word {
   text-align: center;
   margin-top: 15px;
-  > button {
-    color: $lighBlue;
+  &-button.button {
     border: 1px solid $lighBlue;
-    background-color: #fff;
+    background-color: $lighBlue;
+    color: #fff;
     font-size: 24px;
     font-weight: 300;
     padding: 10px 15px;
     border-radius: 3px;
+    margin: 0px 10px;
     &:active {
       padding: 11px 14px 9px 16px;
       box-shadow: inset 1px 1px 3px 2px rgba(150, 150, 150, 0.2);
     }
+  }
+  &-button-reverse.button {
+    background-color: #fff;
+    color: $lighBlue;
   }
 }

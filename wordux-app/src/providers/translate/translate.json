@@ -5,15 +5,18 @@
   "game": {
     "baseline": "A game of words"
   },
+  "played": {
+    "yourValidatedWords": "Vos mots valides"
+  },
   "shared": {
     "none": "aucun",
-    "points": "points",
-    "submit": "Soumettre"
+    "points": "points"
+  },
+  "submit": {
+    "submitWord": "Soumettre",
+    "clearWord": "Effacer"
   },
   "try": {
     "yourTry": "Votre essai"
-  },
-  "played": {
-    "yourValidatedWords": "Vos mots valides"
   }
 }
