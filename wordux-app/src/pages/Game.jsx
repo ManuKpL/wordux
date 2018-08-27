@@ -3,31 +3,35 @@ import PropTypes from 'prop-types';
 
 import Draw from '../components/Draw';
 import Try from '../components/Try';
+import SubmitWord from '../components/SubmitWord';
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pointsTotal: 0,
+      currentPoints: 0,
       word: 'shared.none',
     };
     this.letters = [];
   }
 
-  // private
+  // PRIVATES ..................................................................
+
   buildNewWord() {
     return this.letters.reduce((w, { value }) => w + value, '') || 'shared.none';
   }
 
-  calculatePointsTotal() {
+  calculateCurrentPoints() {
     return this.letters.reduce((sum, { points }) => sum + points, 0);
   }
+
+  // GAME LOGIC ................................................................
 
   addLetterToWord(letter) {
     this.letters = [...this.letters, letter];
     const newWord = this.buildNewWord();
     this.setState({
-      pointsTotal: this.calculatePointsTotal(),
+      currentPoints: this.calculateCurrentPoints(),
       word: newWord,
     });
   }
@@ -36,14 +40,25 @@ class Game extends React.Component {
     this.letters = this.letters.filter(l => l.uid !== letter.uid);
     const newWord = this.buildNewWord();
     this.setState({
-      pointsTotal: this.calculatePointsTotal(),
+      currentPoints: this.calculateCurrentPoints(),
       word: newWord,
     });
   }
 
+  submitWord() {
+    const { submitWord } = this.props;
+    const { word } = this.state;
+    submitWord(word)
+      .then((success) => {
+        console.log({ success });
+      });
+  }
+
+  // RENDER ....................................................................
+
   render() {
     const { draw } = this.props;
-    const { pointsTotal, word } = this.state;
+    const { currentPoints, word } = this.state;
     return (
       <main>
         <h2>A game of words</h2>
@@ -52,7 +67,8 @@ class Game extends React.Component {
           draw={draw}
           removeLetter={this.removeLetterFromWord.bind(this)}
         />
-        <Try word={word} points={pointsTotal} />
+        <Try word={word} points={currentPoints} />
+        <SubmitWord submit={this.submitWord.bind(this)} />
       </main>
     );
   }
@@ -60,6 +76,7 @@ class Game extends React.Component {
 
 Game.propTypes = {
   draw: PropTypes.arrayOf(Object),
+  submitWord: PropTypes.func.isRequired,
 };
 
 Game.defaultProps = {

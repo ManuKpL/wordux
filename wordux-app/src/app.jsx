@@ -20,6 +20,8 @@ class WorduxLayout extends React.Component {
     };
   }
 
+  // ASYNC .....................................................................
+
   componentWillMount() {
     axios.get('/api/letters')
       .then(({ data }) => {
@@ -29,15 +31,7 @@ class WorduxLayout extends React.Component {
       });
   }
 
-  howManyLettersToDraw() {
-    const { draw, remainingCount } = this.state;
-    if (remainingCount === 0) {
-      return 0;
-    }
-
-    const missingLetters = this.DRAW_LENGTH - draw.length;
-    return Math.min(missingLetters, remainingCount);
-  }
+  // GAME LOGIC ................................................................
 
   drawLetter() {
     const randomLetter = sample(this.dynamicList);
@@ -50,6 +44,25 @@ class WorduxLayout extends React.Component {
     }, 400);
   }
 
+  submitWord(word) {
+    return axios.get(`/api/words/${word}`)
+      .then(({ data }) => data.validity);
+  }
+
+  // PRIVATES ..................................................................
+
+  howManyLettersToDraw() {
+    const { draw, remainingCount } = this.state;
+    if (remainingCount === 0) {
+      return 0;
+    }
+
+    const missingLetters = this.DRAW_LENGTH - draw.length;
+    return Math.min(missingLetters, remainingCount);
+  }
+
+  // RENDER ....................................................................
+
   render() {
     const { draw, remainingCount } = this.state;
     const lettersToDraw = this.howManyLettersToDraw();
@@ -61,7 +74,7 @@ class WorduxLayout extends React.Component {
     return (
       <div>
         <h1>Hello Wordux!</h1>
-        <Game draw={draw} />
+        <Game draw={draw} submitWord={this.submitWord.bind(this)} />
       </div>
     );
   }
