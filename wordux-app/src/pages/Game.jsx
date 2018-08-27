@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Draw from '../components/Draw';
+import PlayedWords from '../components/PlayedWords';
 import Try from '../components/Try';
 import SubmitWord from '../components/SubmitWord';
 
@@ -9,10 +10,12 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      playedWords: [],
       currentPoints: 0,
       word: 'shared.none',
     };
     this.letters = [];
+    this.promise = undefined;
   }
 
   // PRIVATES ..................................................................
@@ -45,20 +48,51 @@ class Game extends React.Component {
     });
   }
 
+  removeWord() {
+    this.setState({
+      currentPoints: undefined,
+      word: undefined,
+    });
+  }
+
+  saveWord() {
+    this.setState(({ currentPoints, playedWords, word }) => ({
+      playedWords: playedWords.concat({
+        points: currentPoints,
+        timeStamp: Date.now(),
+        word,
+      }),
+      currentPoints: undefined,
+      word: undefined,
+    }));
+  }
+
   submitWord() {
     const { submitWord } = this.props;
     const { word } = this.state;
-    submitWord(word)
-      .then((success) => {
-        console.log({ success });
-      });
+
+    if (word && word.length > 1 && !this.promise) {
+      this.promise = submitWord(word)
+        .then((wordIsValid) => {
+          if (wordIsValid) {
+            this.saveWord();
+          } else {
+            this.removeWord();
+          }
+        })
+        .then(() => {
+          this.promise = undefined;
+          this.letters = [];
+        });
+    }
   }
 
   // RENDER ....................................................................
 
   render() {
     const { draw } = this.props;
-    const { currentPoints, word } = this.state;
+    const { currentPoints, playedWords, word } = this.state;
+
     return (
       <main>
         <h2>A game of words</h2>
@@ -69,6 +103,7 @@ class Game extends React.Component {
         />
         <Try word={word} points={currentPoints} />
         <SubmitWord submit={this.submitWord.bind(this)} />
+        <PlayedWords values={playedWords} />
       </main>
     );
   }

@@ -1,0 +1,16 @@
+.submit-word {
+  text-align: center;
+  > button {
+    color: $lighBlue;
+    border: 1px solid $lighBlue;
+    background-color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+    padding: 10px 15px;
+    border-radius: 3px;
+    &:active {
+      padding: 11px 14px 9px 16px;
+      box-shadow: inset 1px 1px 3px 2px rgba(150, 150, 150, 0.2);
+    }
+  }
+}

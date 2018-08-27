@@ -5,8 +5,11 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  font-family: 'Lato', sans-serif;
   color: $darkBlue;
+}
+
+* {
+  font-family: 'Lato', sans-serif;
 }
 
 div#app > div {

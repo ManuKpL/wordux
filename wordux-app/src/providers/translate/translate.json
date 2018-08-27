@@ -7,9 +7,13 @@
   },
   "shared": {
     "none": "aucun",
-    "points": "points"
+    "points": "points",
+    "submit": "Soumettre"
   },
   "try": {
     "yourTry": "Votre essai"
+  },
+  "played": {
+    "yourValidatedWords": "Vos mots"
   }
 }
