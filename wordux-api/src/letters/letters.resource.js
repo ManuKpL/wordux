@@ -1,17 +1,18 @@
 import LettersService from './letters.service';
 
-const getLetters = (() => {
-  const service = new LettersService();
+export default class LettersResource {
+  constructor() {
+    this.route = '/letters';
+    this.service = new LettersService();
+  }
 
-  return () => [
-    '/api/letters',
-    (req, res) => {
+  getLetters() {
+    return (req, res) => {
+      const { lettersList } = this.service;
       res.json({
         status: 'OK',
-        lettersList: service.lettersList,
+        lettersList,
       });
-    },
-  ];
-})();
-
-export default getLetters;
+    };
+  }
+}

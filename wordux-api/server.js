@@ -1,22 +1,15 @@
 import express from 'express';
-import getLetters from './src/letters/letters.resource';
+import apiRouter from './src/router';
 
-const app = express();
-
-app.get('/', (req, res) => {
-  res.json({
-    page: 'home',
-    data: 'Hello World!',
+(() => {
+  const app = express();
+  app.use('/api', apiRouter);
+  app.listen(3000, () => {
+    console.info(`
+      \\\\\\         ///
+       \\\\\\ //\\\\\\ ///
+        \\\\//  \\\\///
+    `);
+    console.info('Api listening on port 3000');
   });
-});
-
-app.get(...getLetters());
-
-app.listen(3000, () => {
-  console.info(`
-    \\\\\\         ///
-     \\\\\\ //\\\\\\ ///
-      \\\\//  \\\\///
-  `);
-  console.info('Api listening on port 3000');
-});
+})();
