@@ -10,7 +10,7 @@ import apiRouter from './src/router';
 
   app.use('/api', apiRouter);
 
-  app.listen(3000, () => {
+  app.listen(process.env.PORT || 3000, () => {
     console.info(`
       \\\\\\         ///
        \\\\\\ //\\\\\\ ///
