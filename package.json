@@ -4,7 +4,7 @@
   "description": "play with words",
   "main": "index.js",
   "scripts": {
-    "build:app": "webpack -p --config ./wordux-app/webpack.config.js",
+    "build": "webpack -p --config ./wordux-app/webpack.config.js",
     "start": "node ./index.js",
     "start:api:dev": "nodemon ./index.js",
     "start:app:dev": "webpack-dev-server --config ./wordux-app/webpack.config.js",
