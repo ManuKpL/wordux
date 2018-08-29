@@ -8,11 +8,9 @@ export default (() => {
   const lettersResource = new LettersResource();
   const wordsResource = new WordsResource();
 
-  apiRouter.route(lettersResource.route)
-    .get(lettersResource.getLetters());
-
-  apiRouter.route(`${wordsResource.route}/:word`)
-    .get(wordsResource.getWordValidity());
+  apiRouter
+    .use(lettersResource.route, lettersResource.router())
+    .use(wordsResource.route, wordsResource.router());
 
   return apiRouter;
 })();

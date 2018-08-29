@@ -1,3 +1,4 @@
+import express from 'express';
 import LettersService from './letters.service';
 
 export default class LettersResource {
@@ -6,7 +7,7 @@ export default class LettersResource {
     this.service = new LettersService();
   }
 
-  getLetters() {
+  _getLetters() {
     return (req, res) => {
       const { lettersList } = this.service;
       res.json({
@@ -14,5 +15,14 @@ export default class LettersResource {
         lettersList,
       });
     };
+  }
+
+  router() {
+    const router = express.Router();
+
+    router.route('/')
+      .get(this._getLetters());
+
+    return router;
   }
 }

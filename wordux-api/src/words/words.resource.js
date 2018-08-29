@@ -1,3 +1,4 @@
+import express from 'express';
 import WordsService from './words.service';
 
 export default class WordsResource {
@@ -6,7 +7,7 @@ export default class WordsResource {
     this.service = new WordsService();
   }
 
-  getWordValidity() {
+  _getWordValidity() {
     return (req, res) => {
       const { word } = req.params;
 
@@ -24,5 +25,14 @@ export default class WordsResource {
           });
         });
     };
+  }
+
+  router() {
+    const router = express.Router();
+
+    router.route('/:word')
+      .get(this._getWordValidity());
+
+    return router;
   }
 }
