@@ -13,7 +13,7 @@ body {
 }
 
 div#app > div {
-  background-color: rgb(253, 253, 253);
+  background-color: $white;
   padding: 30px;
   min-width: 50vw;
   box-shadow: 2px 2px 7px 2px rgba(80, 80, 80, .3);
@@ -29,6 +29,10 @@ h1 {
   text-align: center;
 }
 
+main > h2 {
+  position: relative;
+}
+
 .text {
   &-darkBlue {
     color: $darkBlue
@@ -36,8 +40,8 @@ h1 {
   &-blue {
     color: $blue
   };
-  &-lighBlue {
-    color: $lighBlue
+  &-lightBlue {
+    color: $lightBlue
   };
   &-lightGreen {
     color: $lightGreen

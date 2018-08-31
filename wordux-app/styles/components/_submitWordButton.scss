@@ -2,8 +2,8 @@
   text-align: center;
   margin-top: 15px;
   &-button.button {
-    border: 1px solid $lighBlue;
-    background-color: $lighBlue;
+    border: 1px solid $lightBlue;
+    background-color: $lightBlue;
     color: #fff;
     font-size: 24px;
     font-weight: 300;
@@ -17,6 +17,6 @@
   }
   &-button-reverse.button {
     background-color: #fff;
-    color: $lighBlue;
+    color: $lightBlue;
   }
 }

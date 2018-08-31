@@ -112,7 +112,7 @@ class Game extends React.Component {
 
     return (
       <main>
-        <h2>A game of words</h2>
+        <h2>A game of words<i class="icon-refresh pull-right" /></h2>
         <Draw
           addLetter={this.addLetterToWord.bind(this)}
           draw={draw}

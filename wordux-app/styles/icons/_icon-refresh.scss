@@ -1,0 +1,34 @@
+.icon-refresh {
+  $size: 18px;
+  $border-size: 5px;
+  $border-offset: -2.5px;
+
+  width: $size;
+  height: $size;
+  margin: 0 10px;
+  display: inline-block;
+  position: relative;
+  background-color: $white;
+  border-radius: 50%;
+  border: 3px solid $lightBlue;
+  &:after {
+    position: absolute;
+    top: $border-offset;
+    left: $border-offset;
+    content: '';
+    border-top: $border-size solid $lightBlue;
+    border-right: $border-size solid $lightBlue;
+    border-bottom: $border-size solid transparent;
+    border-left: $border-size solid transparent;
+  }
+  &:before {
+    position: absolute;
+    bottom: $border-offset;
+    right: $border-offset;
+    content: '';
+    border-top: $border-size solid transparent;
+    border-right: $border-size solid transparent;
+    border-bottom: $border-size solid $lightBlue;
+    border-left: $border-size solid $lightBlue;
+  }
+}
