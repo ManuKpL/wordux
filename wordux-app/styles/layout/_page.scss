@@ -15,8 +15,13 @@ body {
 div#app > div {
   background-color: rgb(253, 253, 253);
   padding: 30px;
-  min-width: 75vw;
+  min-width: 50vw;
   box-shadow: 2px 2px 7px 2px rgba(80, 80, 80, .3);
+
+  @media screen and (max-width: $sm-breakpoint) {
+    min-width: calc(100vw - 60px);
+    min-height: 100vh;
+  }
 }
 
 h1 {

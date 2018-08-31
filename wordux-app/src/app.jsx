@@ -10,7 +10,7 @@ class WorduxLayout extends React.Component {
   constructor(props) {
     super(props);
 
-    this.DRAW_LENGTH = 10;
+    this.DRAW_LENGTH = 12;
     this.INITIAL_LIST = [];
 
     this.dynamicList = [];

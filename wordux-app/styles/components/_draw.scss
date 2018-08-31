@@ -3,5 +3,11 @@ section.draw-wrapper > div {
   flex-wrap: wrap;
   justify-content: center;
   min-height: 100px;
+  margin: 0 -10px;
+
   > p > b { font-size: 20px; }
+
+  @media screen and (max-width: $sm-breakpoint) {
+    margin: 0 -30px;
+  }
 }
