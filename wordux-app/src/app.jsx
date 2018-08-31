@@ -15,6 +15,7 @@ class WorduxLayout extends React.Component {
 
     this.dynamicList = [];
     this.state = {
+      canDrawAgain: false,
       draw: [],
       remainingCount: this.dynamicList.length,
     };
@@ -33,11 +34,12 @@ class WorduxLayout extends React.Component {
 
   // GAME LOGIC ................................................................
 
-  drawLetter() {
+  drawLetter(lettersToDraw = this.DRAW_LENGTH) {
     const randomLetter = sample(this.dynamicList);
     this.dynamicList = this.dynamicList.filter(({ uid }) => uid !== randomLetter.uid);
     setTimeout(() => {
       this.setState(({ draw }) => ({
+        canDrawAgain: lettersToDraw === 1,
         draw: [...draw, randomLetter],
         remainingCount: this.dynamicList.length,
       }));
@@ -48,6 +50,7 @@ class WorduxLayout extends React.Component {
     this.setState(({ draw }) => {
       const newDraw = draw.filter(l => !letters.find(e => e.uid === l.uid));
       return {
+        canDrawAgain: false,
         draw: newDraw,
       };
     });
@@ -73,11 +76,11 @@ class WorduxLayout extends React.Component {
   // RENDER ....................................................................
 
   render() {
-    const { draw, remainingCount } = this.state;
+    const { canDrawAgain, draw, remainingCount } = this.state;
     const lettersToDraw = this.howManyLettersToDraw();
 
     if (remainingCount > 0 && lettersToDraw > 0) {
-      this.drawLetter();
+      this.drawLetter(lettersToDraw);
     }
 
     return (
@@ -85,6 +88,7 @@ class WorduxLayout extends React.Component {
         <h1>Hello Wordux!</h1>
         <Game
           draw={draw}
+          canDrawAgain={canDrawAgain}
           removeLettersFromDraw={this.removeLettersFromDraw.bind(this)}
           submitWord={this.submitWord.bind(this)}
         />

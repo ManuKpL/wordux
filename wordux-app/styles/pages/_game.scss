@@ -1,0 +1,13 @@
+main.game-layout {
+  > h2 {
+    position: relative;
+    > button {
+      float: right;
+      border: none;
+      cursor: pointer;
+      background-color: transparent;
+      padding: 0;
+      &:focus { outline: none; }
+    }
+  }
+}

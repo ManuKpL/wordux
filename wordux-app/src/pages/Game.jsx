@@ -46,6 +46,13 @@ class Game extends React.Component {
     });
   }
 
+  redrawAll() {
+    const { draw, canDrawAgain, removeLettersFromDraw } = this.props;
+    if (canDrawAgain) {
+      removeLettersFromDraw(draw);
+    }
+  }
+
   removeLetterFromWord(letter) {
     this.setState(({ selectedLetters }) => {
       const newLetters = selectedLetters.filter(l => l.uid !== letter.uid);
@@ -111,8 +118,13 @@ class Game extends React.Component {
     } = this.state;
 
     return (
-      <main>
-        <h2>A game of words<i class="icon-refresh pull-right" /></h2>
+      <main class="game-layout">
+        <h2>
+          A game of words
+          <button type="button" onClick={this.redrawAll.bind(this)}>
+            <i class="icon-refresh" />
+          </button>
+        </h2>
         <Draw
           addLetter={this.addLetterToWord.bind(this)}
           draw={draw}
@@ -128,12 +140,14 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
+  canDrawAgain: PropTypes.bool,
   draw: PropTypes.arrayOf(Object),
   removeLettersFromDraw: PropTypes.func.isRequired,
   submitWord: PropTypes.func.isRequired,
 };
 
 Game.defaultProps = {
+  canDrawAgain: false,
   draw: [],
 };
 
