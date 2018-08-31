@@ -1,6 +1,6 @@
 {
   "name": "wordux",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "play with words",
   "main": "index.js",
   "scripts": {
