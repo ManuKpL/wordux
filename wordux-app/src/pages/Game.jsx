@@ -51,6 +51,7 @@ class Game extends React.Component {
     const { draw, canDrawAgain, removeLettersFromDraw } = this.props;
     if (canDrawAgain) {
       removeLettersFromDraw(draw);
+      this.removeWord();
     }
   }
 
