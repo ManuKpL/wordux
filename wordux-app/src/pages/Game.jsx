@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import ButtonRefresh from '../components/ButtonRefresh';
 import Draw from '../components/Draw';
 import PlayedWords from '../components/PlayedWords';
 import Try from '../components/Try';
@@ -121,9 +122,7 @@ class Game extends React.Component {
       <main class="game-layout">
         <h2>
           A game of words
-          <button type="button" onClick={this.redrawAll.bind(this)}>
-            <i class="icon-refresh" />
-          </button>
+          <ButtonRefresh redrawAll={this.redrawAll.bind(this)} />
         </h2>
         <Draw
           addLetter={this.addLetterToWord.bind(this)}

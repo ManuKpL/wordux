@@ -1,0 +1,18 @@
+.button-refresh {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0;
+  position: relative;
+  transform: rotate(45deg);
+  &:focus { outline: none; }
+  &:after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    background-color: $white;
+    top: -1px;
+    left: calc(50% - 2px);
+  }
+}
