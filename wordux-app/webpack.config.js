@@ -10,7 +10,7 @@ module.exports = {
     path: resolve(__dirname, 'dist'),
   },
   devServer: {
-    contentBase: resolve(__dirname, 'dist'),
+    static: resolve(__dirname, 'dist'),
     open: true,
     port: 1337,
     proxy: {
